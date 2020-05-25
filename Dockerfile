@@ -3,11 +3,12 @@ FROM golang:latest
 MAINTAINER sosisusy <qwexodn@gmail.com>
 
 
-COPY . /source
 WORKDIR /source
+COPY . .
 
-RUN go mod download
+RUN go get github.com/canthefason/go-watcher \
+    && go install github.com/canthefason/go-watcher/cmd/watcher
 
 EXPOSE 80
 
-CMD [ "/bin/bash", "-c", "go run ./server.go" ]
+CMD [ "watcher"]
