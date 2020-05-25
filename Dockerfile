@@ -8,9 +8,13 @@ WORKDIR /source
 
 
 
-RUN go mod download \
-    && go build -o main.exe
+RUN go mod download
+# RUN go mod download \
+#     && go build -o main.exe
 
 EXPOSE 80
 
-CMD [ "./main.exe" ]
+VOLUME [ "/data" ]
+
+# CMD [ "./main.exe" ]
+CMD [ "/bin/bash", "-c", "go run ./server.go" ]
